@@ -1,0 +1,13 @@
+{
+  "name": "baidu-aip-sample",
+  "description": "百度AI开放平台Nodejs SDK 调用示例",
+  "main": "main.js",
+  "author": "baidu-aip",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Baidu-AIP/sdk-sample.git"
+  },
+  "dependencies": {
+    "baidu-aip-sdk": "^1.3.1"
+  }
+}
