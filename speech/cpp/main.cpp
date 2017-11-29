@@ -53,7 +53,7 @@ void TTS(aip::Speech* client) {
     std::map<std::string, std::string> options;
     options["spd"] = "5";
     options["per"] = "2";
-    ofile.open("./tts.mp3");
+    ofile.open("./tts.mp3", std::ios::out | std::ios::binary);
     Json::Value result = client->text2audio("百度语音合成测试", options, file_ret);
     // 如果error_code字段为空则说明合成成功，返回mp3文件内容
     if (result["error_code"] == Json::nullValue)
