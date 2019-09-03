@@ -1,5 +1,5 @@
 // 请替换您下载的C++SDK路径
-#include "aip-cpp-sdk-x.x.x/speech.h"
+#include "aip-cpp-sdk-x.x.x/speech.h
 
 void ASR(aip::Speech* client);
 
@@ -12,11 +12,18 @@ int main()
     // 务必替换百度云控制台中新建百度语音应用的 Api Key 和 Secret Key
     aip::Speech * client = new aip::Speech("填写appid", "请填写Api Key", "请填写Secret Key");
     
-    ASR(client);
+    // 打印详细请求结果，可以打开查看详细请求内容
+    client->setDebug(false);
     
-    ASR_url(client);
+    // 语音识别调用
+    ASR(client);
 
+    // 语音识别调用
     TTS(client);
+    
+    // 语音识别极速版调用
+    TTS(client);
+
     
     return 0;
 }
@@ -26,7 +33,6 @@ int main()
  */
 void ASR(aip::Speech* client) {
     std::map<std::string, std::string> options;
-    options["lan"] = "ZH";
     std::string file_content;
     aip::get_file_content("../assets/16k_test.pcm", &file_content);
     Json::Value result = client->recognize(file_content, "pcm", 16000, options);
@@ -34,16 +40,14 @@ void ASR(aip::Speech* client) {
 }
 
 /**
- * ASR语音识别示例,使用远程文件地址
+ * ASR语音识别极速版示例
  */
-void ASR_url(aip::Speech* client) {
+void ASR_PRO(aip::Speech* client) {
     std::map<std::string, std::string> options;
-    options["lan"] = "zh";
-    Json::Value result =
-    client->recognize_url("http://bos.nj.bpc.baidu.com/v1/audio/8k.amr",
-                          "http://your_site/dump",
-                          "amr", 8000, options);
-    std::cout << "语音识别远程文件结果:" << std::endl << result.toStyledString();
+    std::string file_content;
+    aip::get_file_content("../assets/16k_test.pcm", &file_content);
+    Json::Value result = client->recognize_pro(file_content, "pcm", 16000, options);
+    std::cout << "语音识别极速版本地文件结果:" << std::endl << result.toStyledString();
 }
 
 /**
